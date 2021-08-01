@@ -1,0 +1,35 @@
+plugins {
+    id "java-library"
+    id "java-library-distribution"
+}
+
+version = "0.9.43-SNAPSHOT"
+group = 'de.glasen-hardt'
+sourceCompatibility = "11"
+
+repositories {
+    mavenLocal()
+    mavenCentral()
+}
+
+
+apply plugin: 'maven-publish'
+publishing {
+    publications {
+        maven(MavenPublication) {
+            artifact("build/libs/domino-jna-java11-$version" + ".jar") {
+                extension "jar"
+            }
+        }
+    }
+}
+
+dependencies {
+    implementation 'net.java.dev.jna:jna:5.8.0'
+    implementation('com.ibm:domino-api-binaries:11.0.0')
+    implementation('org.glassfish.corba:glassfish-corba-omgapi:4.2.4')
+    implementation('org.glassfish.corba:glassfish-corba-orb:4.2.4')
+    implementation 'com.googlecode.concurrentlinkedhashmap:concurrentlinkedhashmap-lru:1.4.2'
+    implementation 'com.drewnoakes:metadata-extractor:2.16.0'
+    implementation 'cglib:cglib:3.3.0'
+}
